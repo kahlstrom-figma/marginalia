@@ -1,19 +1,22 @@
 require 'marginalia'
-require 'rails/railtie'
 
 module Marginalia
-  class Railtie < Rails::Railtie
-    initializer 'marginalia.insert' do
-      ActiveSupport.on_load :active_record do
-        Marginalia::Railtie.insert_into_active_record
-      end
+  if defined? Rails::Railtie
+    require 'rails/railtie'
 
-      ActiveSupport.on_load :action_controller do
-        Marginalia::Railtie.insert_into_action_controller
-      end
+    class Railtie < Rails::Railtie
+      initializer 'marginalia.insert' do
+        ActiveSupport.on_load :active_record do
+          Marginalia::Railtie.insert_into_active_record
+        end
 
-      ActiveSupport.on_load :active_job do
-        Marginalia::Railtie.insert_into_active_job
+        ActiveSupport.on_load :action_controller do
+          Marginalia::Railtie.insert_into_action_controller
+        end
+
+        ActiveSupport.on_load :active_job do
+          Marginalia::Railtie.insert_into_active_job
+        end
       end
     end
 
