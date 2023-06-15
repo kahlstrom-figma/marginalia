@@ -21,7 +21,7 @@ module Marginalia
     end
   end
 
-  class Railtie < Rails::Railtie
+  class Railtie
     def self.insert
       insert_into_active_record
       insert_into_action_controller
